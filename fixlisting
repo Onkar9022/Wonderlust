@@ -1,0 +1,23 @@
+const mongoose = require("mongoose");
+const Listing = require("./models/listing"); // adjust path
+
+mongoose.connect("mongodb://127.0.0.1:27017/wondershare")
+  .then(async () => {
+    console.log("Connected to DB...");
+
+    const result = await Listing.updateMany(
+      { "description.url": { $exists: true } },
+      [
+        {
+          $set: {
+            image: "$description",
+            description: "No description provided"
+          }
+        }
+      ]
+    );
+
+    console.log(result);
+    mongoose.connection.close();
+  })
+  .catch(err => console.log(err));
