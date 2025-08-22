@@ -1,0 +1,20 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row justify-content-center my-5">
+  <div class="col-md-8">
+    <div class="card border-danger">
+      <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">Error <%= typeof statusCode !== 'undefined' ? statusCode : 500 %></h5>
+      </div>
+      <div class="card-body">
+        <p class="fs-5"><%= message || 'Something went wrong!' %></p>
+        <% if (process.env.NODE_ENV === 'development' && err && err.stack) { %>
+          <pre class="small text-muted"><%= err.stack %></pre>
+        <% } %>
+        <a href="/" class="btn btn-outline-danger mt-3">Go Home</a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
